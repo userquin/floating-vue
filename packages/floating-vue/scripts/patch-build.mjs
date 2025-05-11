@@ -122,6 +122,7 @@ async function patchBuild () {
     // unimport presets
     fs.cp(resolve(node, 'types.d.ts'), resolve(node, 'types.d.mts')),
     fs.cp(resolve(dist, 'unimport-presets.d.ts'), resolve(dist, 'unimport-presets.d.mts')),
+    fs.cp(resolve(dist, 'unplugin-vue-components-resolvers.d.ts'), resolve(dist, 'unplugin-vue-components-resolvers.d.mts')),
   ])
   await Promise.all([
     // patch index.d.ts
@@ -139,8 +140,9 @@ async function patchBuild () {
     // utils
     editFile(resolve(dist, 'utils.d.mts'), content => patchFileImports(content)),
     // unimport presets
-    editFile(resolve(dist, 'unimport-presets.d.mts'), content => patchFileImports(content)),
     editFile(resolve(node, 'types.d.mts'), content => patchFileImports(content)),
+    editFile(resolve(dist, 'unimport-presets.d.mts'), content => patchFileImports(content)),
+    editFile(resolve(dist, 'unplugin-vue-components-resolvers.d.mts'), content => patchFileImports(content)),
   ])
 
   await editFile(resolve(dist, 'index.d.mts'), content => replaceLocalImports(content))

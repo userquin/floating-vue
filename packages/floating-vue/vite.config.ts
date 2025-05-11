@@ -14,8 +14,8 @@ export default defineConfig({
         resolve(__dirname, './src/directives.ts'),
         resolve(__dirname, './src/utils.ts'),
         resolve(__dirname, './src/unimport-presets.ts'),
+        resolve(__dirname, './src/unplugin-vue-components-resolvers.ts'),
       ],
-      name: 'FloatingVue',
     },
     rollupOptions: {
       external: [
@@ -23,6 +23,7 @@ export default defineConfig({
         '@floating-ui/dom',
         'unimport',
         'floating-vue/directives',
+        'floating-vue/components',
       ],
       output: {
         globals: {

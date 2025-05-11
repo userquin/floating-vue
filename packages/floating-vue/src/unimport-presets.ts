@@ -1,14 +1,13 @@
 import type { DirectiveName, FloatingVueDirectivesOptions } from './node/types'
 import type { InlinePreset, PresetImport } from 'unimport'
-import * as directives from 'floating-vue/directives'
+import { DirectiveNames } from './node/types'
 
 export type { DirectiveName, FloatingVueDirectivesOptions }
 
 export function FloatingVueDirectives (options: FloatingVueDirectivesOptions = {}) {
   const { exclude, prefix } = options
-  const directivesImports = Array.from(Object.keys(directives)) as DirectiveName[]
 
-  const useDirectives = directivesImports.filter(entry => !exclude || !exclude.includes(entry))
+  const useDirectives = DirectiveNames.filter(entry => !exclude || !exclude.includes(entry))
 
   return {
     from: 'floating-vue/directives',

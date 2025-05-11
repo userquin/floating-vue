@@ -34,6 +34,10 @@
       "types": "./dist/unimport-presets.d.mts",
       "default": "./dist/unimport-presets.mjs"
     },
+    "./unplugin-vue-components-resolvers": {
+      "types": "./dist/unplugin-vue-components-resolvers.d.mts",
+      "default": "./dist/unplugin-vue-components-resolvers.mjs"
+    },
     "./nuxt": "./nuxt.mjs",
     "./style.css": "./dist/style.css",
     "./dist/style.css": "./dist/style.css"
@@ -44,6 +48,7 @@
     "directives.d.ts",
     "utils.d.ts",
     "unimport-presets.d.ts",
+    "unplugin-vue-components-resolvers.d.ts",
     "*.mjs"
   ],
   "dependencies": {
