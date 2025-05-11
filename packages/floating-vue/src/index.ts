@@ -2,6 +2,7 @@ import { assign } from './util/assign-deep'
 import { config, FloatingVueConfig } from './config'
 import 'vue-resize/dist/vue-resize.css'
 import './style.css'
+
 // Components
 import PrivateDropdown from './components/Dropdown'
 import PrivateMenu from './components/Menu'
@@ -11,10 +12,8 @@ import PrivateVTooltip from './directives/v-tooltip'
 import PrivateVClosePopper from './directives/v-close-popper'
 
 /* Exports */
-
 export const options = config
 export { createTooltip, destroyTooltip } from './directives/v-tooltip'
-export const vClosePopper = PrivateVClosePopper // For <script setup>
 
 /* Vue plugin */
 export function install (app, options: FloatingVueConfig = {}) {
