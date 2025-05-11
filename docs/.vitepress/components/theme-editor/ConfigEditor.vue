@@ -1,7 +1,7 @@
 <script>
 import { builtinThemes } from './builtin-themes'
 import { mapState, state } from './state'
-import { SHOW_EVENT_MAP, placements } from 'floating-vue'
+import { SHOW_EVENT_MAP, placements } from 'floating-vue/utils'
 import ToolIcon from '~icons/lucide/wrench'
 import Tabs from './Tabs.vue'
 import { loadValue, storeValue } from './util'

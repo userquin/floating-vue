@@ -20,6 +20,7 @@ export default defineConfig({
   resolve: {
     alias: {
       'floating-vue/style.css': resolve(__dirname, '../packages/floating-vue/dist/style.css'),
+      'floating-vue/utils': resolve(__dirname, '../packages/floating-vue/src/utils.ts'),
       'floating-vue': resolve(__dirname, '../packages/floating-vue/src/index.ts'),
     },
   },
