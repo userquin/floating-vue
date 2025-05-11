@@ -54,6 +54,16 @@ function replaceLocalImports (content) {
     })
 }
 
+/**
+ * This script is used to patch the build output of the library.
+ * It does the following:
+ * - Patches all `*.d.ts` files replacing `import('..').Placement` imports to use '../utils'.
+ * - Removes all static CSS imports from the DTS content.
+ * - Generates all the `d.mts` files from the `d.ts` files.
+ * - Patches the `*.d.mts` files to add the `.mjs` extension to all local static and dynamic imports.
+ *
+ * @returns {Promise<void>}
+ */
 async function patchBuild () {
   const root = fileURLToPath(new URL('../', import.meta.url))
   const dist = resolve(root, 'dist')
