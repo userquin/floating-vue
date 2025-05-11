@@ -43,9 +43,8 @@ export const Tooltip = PrivateTooltip
 export const TooltipDirective = PrivateTooltipDirective
 // Utils
 export { hideAllPoppers, recomputeAllPoppers } from './components/Popper'
-export * from './util/events'
-export { placements } from './util/popper'
-export type { Placement } from './util/popper'
+export * from './utils'
+export type { Placement } from './utils'
 // Types
 export type { TriggerEvent } from './components/PopperWrapper.vue'
 

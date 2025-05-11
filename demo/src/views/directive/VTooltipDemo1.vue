@@ -1,3 +1,6 @@
+<script lang="ts">
+//
+</script>
 <template>
   <h1>VTooltip Demo 1</h1>
 
