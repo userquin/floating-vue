@@ -7,3 +7,5 @@ export { default as PopperWrapper } from './dist/components/PopperWrapper.vue'
 export { default as ThemeClass } from './dist/components/ThemeClass'
 export { default as Tooltip } from './dist/components/Tooltip'
 export { default as TooltipDirective } from './dist/components/TooltipDirective.vue'
+
+export const ComponentNames = ['VDropdown', 'VMenu', 'VTooltip', 'Popper', 'PopperContent', 'PopperMethods', 'PopperWrapper', 'ThemeClass', 'Tooltip', 'TooltipDirective']

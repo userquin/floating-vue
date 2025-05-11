@@ -25,12 +25,6 @@ export default defineConfig({
         'floating-vue/directives',
         'floating-vue/components',
       ],
-      output: {
-        globals: {
-          vue: 'Vue',
-          '@floating-ui/dom': 'FloatingUIDOM',
-        },
-      },
     },
   },
   define: {

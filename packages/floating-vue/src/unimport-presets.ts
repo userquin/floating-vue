@@ -1,6 +1,7 @@
-import type { DirectiveName, FloatingVueDirectivesOptions } from './node/types'
+import type { DirectiveName } from './directives'
+import type { FloatingVueDirectivesOptions } from './node/types'
 import type { InlinePreset, PresetImport } from 'unimport'
-import { DirectiveNames } from './node/types'
+import { DirectiveNames } from './directives'
 
 export type { DirectiveName, FloatingVueDirectivesOptions }
 

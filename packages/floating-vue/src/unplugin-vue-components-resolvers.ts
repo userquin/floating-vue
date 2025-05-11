@@ -1,11 +1,12 @@
+import type { DirectiveName } from './directives'
+import type { ComponentName } from 'floating-vue/components'
 import type {
-  DirectiveName,
-  ComponentName,
   FloatingVueDirectivesOptions,
   FloatingVueComponentsOptions,
 } from './node/types'
+import { DirectiveNames } from './directives'
+import { ComponentNames } from 'floating-vue/components'
 import type { ComponentResolver } from 'unplugin-vue-components/types'
-import { ComponentNames, DirectiveNames } from './node/types'
 
 export type { ComponentName, DirectiveName, FloatingVueDirectivesOptions, FloatingVueComponentsOptions }
 
@@ -81,21 +82,21 @@ function createComponentsResolver (
   return {
     type: 'component',
     resolve: async (name) => {
-      let floatingVueName = name
+      let floatingVueName = name as ComponentName
       if (prefix) {
         if (!name.startsWith('FloatingVue')) {
           return undefined
         }
-        floatingVueName = `V${name.slice('FloatingVue'.length)}`
-        if (!ComponentNames.includes(floatingVueName as ComponentName)) {
-          floatingVueName = floatingVueName.slice(1)
+        floatingVueName = `V${name.slice('FloatingVue'.length)}` as ComponentName
+        if (!ComponentNames.includes(floatingVueName)) {
+          floatingVueName = floatingVueName.slice(1) as ComponentName
         }
       }
       if (exclude?.some(e => e === floatingVueName)) {
         return undefined
       }
 
-      if (!ComponentNames.includes(floatingVueName as ComponentName)) {
+      if (!ComponentNames.includes(floatingVueName)) {
         return undefined
       }
       return {
@@ -124,17 +125,17 @@ function createDirectivesResolver (
   return {
     type: 'directive',
     resolve: async (resolvedName) => {
-      let name = resolvedName
+      let name = resolvedName as DirectiveName
       if (prefix) {
         if (!name.startsWith('FloatingVue')) {
           return undefined
         }
-        name = name.slice('FloatingVue'.length)
+        name = name.slice('FloatingVue'.length) as DirectiveName
       }
       if (exclude?.some(e => e === name)) {
         return undefined
       }
-      const directive = DirectiveNames.includes(name as DirectiveName)
+      const directive = DirectiveNames.includes(name)
       if (!directive) {
         return undefined
       }

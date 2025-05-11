@@ -1,10 +1,5 @@
-import * as components from 'floating-vue/components'
-import * as directives from 'floating-vue/directives'
-
-export type ComponentName = keyof typeof import('floating-vue/components')
-export type DirectiveName = keyof typeof import('floating-vue/directives')
-export const ComponentNames = Object.keys(components) as ComponentName[]
-export const DirectiveNames = Object.keys(directives) as DirectiveName[]
+import type { ComponentName } from 'floating-vue/components'
+import type { DirectiveName } from '../directives'
 
 export interface FloatingVueDirectivesOptions {
   /**

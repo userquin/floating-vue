@@ -10,3 +10,6 @@ export { default as PopperWrapper } from './dist/components/PopperWrapper.vue.mj
 export { default as ThemeClass } from './dist/components/ThemeClass.mjs'
 export { default as Tooltip } from './dist/components/Tooltip.mjs'
 export { default as TooltipDirective } from './dist/components/TooltipDirective.vue.mjs'
+
+export declare const ComponentNames: readonly ['VDropdown' | 'VMenu' | 'VTooltip' | 'Popper' | 'PopperContent' | 'PopperMethods' | 'PopperWrapper' | 'ThemeClass' | 'Tooltip' | 'TooltipDirective'];
+export type ComponentName = typeof ComponentNames[number];
