@@ -5,6 +5,7 @@ import { resolve } from 'path'
 patchBuild()
 
 /**
+ * Adds the `.mjs` extension to all local static imports in a DTS file.
  * @param content {string}
  */
 function patchFileImports (content) {
@@ -19,22 +20,19 @@ function patchFileImports (content) {
 }
 
 /**
- * @param content {string}
+ * Updates the content of a file using `transform` to update the content.
+ * @param path {string}
+ * @param transform {(content: string) => string}
  */
-function patchFile (content) {
-  return content.replace(/';/g, '.mjs\';')
+async function editFile (path, transform) {
+  const content = await fs.readFile(path, { encoding: 'utf8' })
+  await fs.writeFile(path, transform(content), 'utf-8')
 }
 
 /**
- * @param path {string}
- * @param callback {(content: string) => string}
+ * Removes all static CSS imports from the DTS content.
+ * @param content {string}
  */
-async function editFile (path, callback) {
-  const content = await fs.readFile(path, { encoding: 'utf8' })
-  await fs.writeFile(path, callback(content), 'utf-8')
-}
-
-/** @param content {string} */
 function removeCssImports (content) {
   return content.replace(/import\s+['"]([^'"]+\.css)['"];\s+/g, () => {
     return ''
@@ -59,6 +57,7 @@ function replaceLocalImports (content) {
 async function patchBuild () {
   const root = fileURLToPath(new URL('../', import.meta.url))
   const dist = resolve(root, 'dist')
+  const srcComponents = resolve(root, 'src/components')
   const components = resolve(dist, 'components')
   const directives = resolve(dist, 'directives')
   const node = resolve(dist, 'node')
@@ -80,10 +79,10 @@ async function patchBuild () {
     editFile(resolve(dist, 'index.d.ts'), content => removeCssImports(content)),
     fs.cp(resolve(dist, 'config.d.ts'), resolve(dist, 'config.d.mts')),
     // vue components
-    // fs.cp(resolve(srcComponents, 'Popper.vue'), resolve(components, 'Popper.vue')),
-    // fs.cp(resolve(srcComponents, 'PopperContent.vue'), resolve(components, 'PopperContent.vue')),
-    // fs.cp(resolve(srcComponents, 'PopperWrapper.vue'), resolve(components, 'PopperWrapper.vue')),
-    // fs.cp(resolve(srcComponents, 'TooltipDirective.vue'), resolve(components, 'TooltipDirective.vue')),
+    fs.cp(resolve(srcComponents, 'Popper.vue'), resolve(components, 'Popper.vue')),
+    fs.cp(resolve(srcComponents, 'PopperContent.vue'), resolve(components, 'PopperContent.vue')),
+    fs.cp(resolve(srcComponents, 'PopperWrapper.vue'), resolve(components, 'PopperWrapper.vue')),
+    fs.cp(resolve(srcComponents, 'TooltipDirective.vue'), resolve(components, 'TooltipDirective.vue')),
     // components
     fs.cp(resolve(dist, 'components.d.ts'), resolve(dist, 'components.d.mts')),
     fs.cp(resolve(components, 'Dropdown.d.ts'), resolve(components, 'Dropdown.d.mts')),
@@ -114,7 +113,6 @@ async function patchBuild () {
     fs.cp(resolve(node, 'types.d.ts'), resolve(node, 'types.d.mts')),
     fs.cp(resolve(dist, 'unimport-presets.d.ts'), resolve(dist, 'unimport-presets.d.mts')),
   ])
-  // patch directives dts file
   await Promise.all([
     // patch index.d.ts
     fs.cp(resolve(dist, 'index.d.ts'), resolve(dist, 'index.d.mts')),
@@ -127,12 +125,12 @@ async function patchBuild () {
     editFile(resolve(components, 'Popper.vue.d.mts'), content => replaceLocalImports(content)),
     editFile(resolve(components, 'PopperWrapper.vue.d.mts'), content => replaceLocalImports(content)),
     // directives
-    editFile(resolve(dist, 'directives.d.mts'), content => patchFile(content)),
+    editFile(resolve(dist, 'directives.d.mts'), content => patchFileImports(content)),
     // utils
-    editFile(resolve(dist, 'utils.d.mts'), content => patchFile(content)),
+    editFile(resolve(dist, 'utils.d.mts'), content => patchFileImports(content)),
     // unimport presets
-    editFile(resolve(dist, 'unimport-presets.d.mts'), content => patchFile(content)),
-    editFile(resolve(node, 'types.d.mts'), content => patchFile(content)),
+    editFile(resolve(dist, 'unimport-presets.d.mts'), content => patchFileImports(content)),
+    editFile(resolve(node, 'types.d.mts'), content => patchFileImports(content)),
   ])
 
   await editFile(resolve(dist, 'index.d.mts'), content => replaceLocalImports(content))
