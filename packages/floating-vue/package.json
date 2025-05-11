@@ -38,7 +38,10 @@
       "types": "./dist/unplugin-vue-components-resolvers.d.mts",
       "default": "./dist/unplugin-vue-components-resolvers.mjs"
     },
-    "./nuxt": "./nuxt.mjs",
+    "./nuxt": {
+      "types": "./nuxt.d.mts",
+      "default": "./nuxt.mjs"
+    },
     "./style.css": "./dist/style.css",
     "./dist/style.css": "./dist/style.css"
   },
@@ -49,7 +52,9 @@
     "utils.d.ts",
     "unimport-presets.d.ts",
     "unplugin-vue-components-resolvers.d.ts",
-    "*.mjs"
+    "nuxt.mjs",
+    "nuxt.d.ts",
+    "nuxt.d.mts"
   ],
   "dependencies": {
     "@floating-ui/dom": "~1.1.1",

@@ -50,7 +50,7 @@ export interface FloatingVueComponentInfo {
   filePath: string
 }
 
-export async function prepareFloatingVueComponents (options: FloatingVueComponentsOptions = {}) {
+export function prepareFloatingVueComponents (options: FloatingVueComponentsOptions = {}) {
   const { prefix = false, exclude = [] } = options
   const info: FloatingVueComponentInfo[] = []
   for (const component of ComponentNames) {
